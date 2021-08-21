@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:funzone/screens/custimize.dart';
 import 'package:sizer/sizer.dart';
 
 class WaitingLobby extends StatelessWidget {
@@ -19,92 +20,30 @@ class WaitingLobby extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
-              margin: EdgeInsets.only(top: 0.3.h),
-              color: Colors.lightBlueAccent,
-              height: 10.h,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                      padding: EdgeInsets.only(left: 8.w),
-                      child: Icon(Icons.person)),
-                  Text("Dr Krishna Kumar"),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Icon(Icons.person_add),
-                      SizedBox(width: 10),
-                      Icon(Icons.block),
-                    ],
-                  )
-                ],
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.only(top: 0.3.h),
-              color: Colors.lightBlueAccent,
-              height: 10.h,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                      padding: EdgeInsets.only(left: 8.w),
-                      child: Icon(Icons.person)),
-                  Text("Dr Krishna Kumar"),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Icon(Icons.person_add),
-                      SizedBox(width: 10),
-                      Icon(Icons.block),
-                    ],
-                  )
-                ],
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.only(top: 0.3.h),
-              color: Colors.lightBlueAccent,
-              height: 10.h,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                      padding: EdgeInsets.only(left: 8.w),
-                      child: Icon(Icons.person)),
-                  Text("Dr Krishna Kumar"),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Icon(Icons.person_add),
-                      SizedBox(width: 10),
-                      Icon(Icons.block),
-                    ],
-                  )
-                ],
-              ),
-            ),
-            Container(
-              margin: EdgeInsets.only(top: 0.3.h),
-              color: Colors.lightBlueAccent,
-              height: 10.h,
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Container(
-                      padding: EdgeInsets.only(left: 8.w),
-                      child: Icon(Icons.person)),
-                  Text("Dr Krishna Kumar"),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Icon(Icons.person_add),
-                      SizedBox(width: 10),
-                      Icon(Icons.block),
-                    ],
-                  )
-                ],
+            GestureDetector(
+              onTap: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                  builder: (context) => Customize(),
+                ));
+              },
+              child: Container(
+                margin: EdgeInsets.only(top: 0.3.h),
+                color: Colors.lightBlueAccent,
+                height: 10.h,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Container(child: Icon(Icons.person)),
+                    Text("Dr Krishna Kumar"),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Icon(Icons.person_add),
+                        Icon(Icons.block),
+                      ],
+                    )
+                  ],
+                ),
               ),
             )
           ],

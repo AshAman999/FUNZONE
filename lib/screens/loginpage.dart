@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
-import 'package:funzone/screens/rooms.dart';
+import 'package:funzone/main.dart';
 
 const users = const {
   'dribbble@gmail.com': '12345',
@@ -54,7 +54,7 @@ class LoginScreen extends StatelessWidget {
   Future<String> _recoverPassword(String name) {
     FirebaseAuth.instance.sendPasswordResetEmail(email: name);
     return Future.delayed(loginTime).then((_) {
-      return "Reset Link HasBeen SentTo Your Email";
+      return "Reset Link Has Been SentTo Your Email";
     });
   }
 
@@ -67,7 +67,7 @@ class LoginScreen extends StatelessWidget {
       onSignup: _signup,
       onSubmitAnimationCompleted: () {
         Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) => LobbyRoom(),
+          builder: (context) => MyApp(),
         ));
       },
       onRecoverPassword: _recoverPassword,

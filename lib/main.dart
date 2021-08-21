@@ -1,9 +1,9 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:funzone/screens/lobby.dart';
 import 'package:funzone/screens/loginpage.dart';
 import 'package:sizer/sizer.dart';
-import 'dart:ui';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -39,8 +39,16 @@ class MyHomePage extends StatefulWidget {
 class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: Text("Logged In"),
+    return Scaffold(
+      body: Container(
+        child: GestureDetector(
+            onTap: () {
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) => WaitingLobby(),
+              ));
+            },
+            child: Center(child: Text("Logged In"))),
+      ),
     );
   }
 }
