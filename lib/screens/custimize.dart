@@ -9,6 +9,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:funzone/Models/Profile.dart';
 import 'package:funzone/apis/firebaseapi.dart';
+import 'package:funzone/screens/lobby.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:sizer/sizer.dart';
 import 'package:random_string/random_string.dart';
@@ -19,6 +20,8 @@ class Customize extends StatefulWidget {
   @override
   _CustomizeState createState() => _CustomizeState();
 }
+
+List<Person> friends = [];
 
 String name = "",
     email = "",
@@ -58,7 +61,10 @@ void updateuserslist() {
     "age": age.toString(),
     "gender": gender,
   };
-  firebaseHelper.addUser(person);
+  firebaseHelper
+      // .addUser(Person(name, about, email, uid, imageurl, friends))
+      .addUser(person)
+      .onError((error, stackTrace) => print("fatal error"));
 }
 
 class _CustomizeState extends State<Customize> {
@@ -149,7 +155,6 @@ class _CustomizeState extends State<Customize> {
                   ],
                 ),
                 CupertinoTextField(
-                    // make first letter uppercase
                     autocorrect: false,
                     textCapitalization: TextCapitalization.words,
                     placeholder: "Enter your name",
@@ -257,10 +262,33 @@ class _CustomizeState extends State<Customize> {
                     updateuserslist();
                     print("object");
                     print(uid);
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => WaitingLobby(),
+                      ),
+                    );
                     // print(name + about + imageurl + gender + age + email);
                   },
                   child: Text("Next"),
                 ),
+                GestureDetector(
+                  child: Container(
+                      margin: EdgeInsets.only(top: 5.h),
+                      child: Text(
+                        "Skip",
+                        style: TextStyle(
+                            fontSize: 16.sp, color: Colors.lightBlueAccent),
+                      )),
+                  onTap: () {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => WaitingLobby(),
+                      ),
+                    );
+                  },
+                )
               ],
             ),
           ),

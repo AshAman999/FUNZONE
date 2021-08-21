@@ -1,6 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:funzone/screens/custimize.dart';
 import 'package:funzone/screens/lobby.dart';
 import 'package:funzone/screens/loginpage.dart';
 import 'package:sizer/sizer.dart';
@@ -21,7 +22,7 @@ class MyApp extends StatelessWidget {
         title: 'Edify ',
         debugShowCheckedModeBanner: false,
         // home: MyHomePage(title: 'A clutter free social media'),
-        home: currentUser != null ? MyHomePage(title: 'Edify') : LoginScreen(),
+        home: currentUser != null ? WaitingLobby() : LoginScreen(),
       );
     });
   }
