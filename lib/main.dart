@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
     var currentUser = FirebaseAuth.instance.currentUser;
     return Sizer(builder: (context, orientation, deviceType) {
       return MaterialApp(
-        title: 'Edify ',
+        title: 'Fun Zone ',
         debugShowCheckedModeBanner: false,
         // home: MyHomePage(title: 'A clutter free social media'),
         home: currentUser != null ? WaitingLobby() : LoginScreen(),

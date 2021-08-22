@@ -45,7 +45,7 @@ void updatefirebaseuser() async {
   imageurl = await snapshot.ref.getDownloadURL();
   var authuser = FirebaseAuth.instance.currentUser;
   authuser!.updateDisplayName(name);
-  authuser.updateEmail(email);
+  // authuser.updateEmail(email);
   authuser.updatePhotoURL(imageurl);
 }
 
