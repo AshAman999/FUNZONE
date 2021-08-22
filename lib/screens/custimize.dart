@@ -1,4 +1,3 @@
-import 'dart:ffi';
 import 'dart:io';
 
 import 'package:firebase_auth/firebase_auth.dart';
@@ -221,7 +220,7 @@ class _CustomizeState extends State<Customize> {
                               placeholder: 'M/F/O',
                               autofillHints: [],
                               maxLength: 1,
-                              keyboardType: TextInputType.number,
+                              keyboardType: TextInputType.text,
                               onChanged: (value) {
                                 gender = value;
                               }),

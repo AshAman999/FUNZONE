@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class FirebaseHelper {
 // Future <void> addBlog(blodData)async{
@@ -29,7 +30,10 @@ class FirebaseHelper {
       print(e);
     });
   }
-  // ignore: non_constant_identifier_names
+
+  void logout() {
+    FirebaseAuth.instance.signOut();
+  } // ignore: non_constant_identifier_names
 
   //delete a post
 
@@ -45,7 +49,7 @@ class FirebaseHelper {
         .get();
   }
 
-  getUsers() async {
+  getusers() async {
     return await FirebaseFirestore.instance.collection("users").get();
   }
 }
