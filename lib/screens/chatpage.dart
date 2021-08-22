@@ -102,10 +102,11 @@ class ChatRoom extends StatelessWidget {
               width: size.width,
               alignment: Alignment.center,
               child: Container(
+                margin: EdgeInsets.symmetric(horizontal: 15),
                 height: size.height / 12,
-                width: size.width / 1.1,
+                width: size.width / 1,
                 child: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Container(
                       height: size.height / 17,
@@ -119,8 +120,13 @@ class ChatRoom extends StatelessWidget {
                             )),
                       ),
                     ),
-                    IconButton(
-                        icon: Icon(Icons.send), onPressed: onSendMessage),
+                    Container(
+                      child: IconButton(
+                        icon: Icon(Icons.send),
+                        onPressed: onSendMessage,
+                        color: Colors.lightBlueAccent,
+                      ),
+                    ),
                   ],
                 ),
               ),

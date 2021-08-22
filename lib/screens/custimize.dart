@@ -80,9 +80,44 @@ class _CustomizeState extends State<Customize> {
     }
   }
 
+  void empty() {
+    name = "";
+    email = "";
+    about = "";
+    imageurl = "";
+    gender = "";
+    age = "";
+    uid = "";
+    imagepath = "";
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.lightBlueAccent,
+        title: Text("Edit Profile"),
+        actions: [
+          // GestureDetector(
+          //   child: Center(
+          //     child: Container(
+          //         padding: EdgeInsets.symmetric(horizontal: 5),
+          //         child: Text(
+          //           "Skip",
+          //           style: TextStyle(fontSize: 12.sp, color: Colors.white),
+          //         )),
+          //   ),
+          //   onTap: () {
+          //     Navigator.pushReplacement(
+          //       context,
+          //       MaterialPageRoute(
+          //         builder: (context) => WaitingLobby(),
+          //       ),
+          //     );
+          //   },
+          // )
+        ],
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: 20.w),
@@ -251,7 +286,7 @@ class _CustomizeState extends State<Customize> {
                       about = value;
                     }),
                 Padding(
-                  padding: EdgeInsets.symmetric(vertical: 2.h),
+                  padding: EdgeInsets.symmetric(vertical: 1.h),
                 ),
                 CupertinoButton(
                   color: Colors.lightBlueAccent,
@@ -259,8 +294,8 @@ class _CustomizeState extends State<Customize> {
                     getUser();
                     updatefirebaseuser();
                     updateuserslist();
-                    print("object");
                     print(uid);
+                    empty();
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
@@ -271,23 +306,6 @@ class _CustomizeState extends State<Customize> {
                   },
                   child: Text("Next"),
                 ),
-                GestureDetector(
-                  child: Container(
-                      margin: EdgeInsets.only(top: 5.h),
-                      child: Text(
-                        "Skip",
-                        style: TextStyle(
-                            fontSize: 16.sp, color: Colors.lightBlueAccent),
-                      )),
-                  onTap: () {
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => WaitingLobby(),
-                      ),
-                    );
-                  },
-                )
               ],
             ),
           ),

@@ -4,6 +4,7 @@ import 'package:funzone/apis/firebaseapi.dart';
 import 'package:funzone/main.dart';
 import 'package:funzone/screens/custimize.dart';
 import 'package:funzone/screens/loadingscreen.dart';
+import 'package:funzone/screens/navbar.dart';
 import 'package:funzone/widgets/chatheads.dart';
 
 class WaitingLobby extends StatefulWidget {
@@ -17,16 +18,13 @@ class _WaitingLobbyState extends State<WaitingLobby> {
   FirebaseHelper firebaseHelper = FirebaseHelper();
   late QuerySnapshot blogSnapshot;
   bool loaded = false;
-
+  final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+  var stream;
   @override
   void initState() {
-    firebaseHelper.getusers().then((result) {
-      blogSnapshot = result;
-
-      print(result.docs[0].get("uploadedImgUrl").toString());
-      setState(() {
-        loaded = true;
-      });
+    stream = _firestore.collection('users').snapshots();
+    setState(() {
+      loaded = true;
     });
     super.initState();
   }
@@ -34,47 +32,47 @@ class _WaitingLobbyState extends State<WaitingLobby> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.lightBlueAccent,
-          title: Text('Waiting Lobby'),
-          leading: IconButton(
-            icon: Icon(Icons.arrow_back),
-            onPressed: () {
-              Navigator.of(context).push(MaterialPageRoute(
-                builder: (context) => Customize(),
-              ));
-            },
-          ),
-          actions: [
-            IconButton(
-              icon: Icon(Icons.logout_rounded),
-              onPressed: () {
-                firebaseHelper.logout();
-                Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => MyApp(),
-                    ));
+      drawer: NavDrawer(imageurl),
+      appBar: AppBar(
+        centerTitle: true,
+        backgroundColor: Colors.lightBlueAccent,
+        title: Text('Fun Zone   💬'),
+        foregroundColor: Colors.lightBlueAccent,
+
+        // leading: IconButton(
+        //   icon: Icon(Icons.arrow_back),
+        //   onPressed: () {
+        //     Navigator.of(context).push(MaterialPageRoute(
+        //       builder: (context) => Customize(),
+        //     ));
+        //   },
+        // ),
+      ),
+      body: !loaded
+          ? LoadingIndicator()
+          : StreamBuilder<QuerySnapshot>(
+              stream: stream,
+              builder: (BuildContext context,
+                  AsyncSnapshot<QuerySnapshot> snapshot) {
+                return snapshot.data == null
+                    ? LoadingIndicator()
+                    : ListView.builder(
+                        physics: BouncingScrollPhysics(
+                            parent: AlwaysScrollableScrollPhysics()),
+                        itemCount: snapshot.data!.docs.length,
+                        itemBuilder: (context, index) {
+                          return ChatHeads(
+                            snapshot.data!.docs[index].get("username"),
+                            snapshot.data!.docs[index].get("email"),
+                            snapshot.data!.docs[index].get("uploadedImgUrl"),
+                            snapshot.data!.docs[index].get("about"),
+                            snapshot.data!.docs[index].get("uid"),
+                            snapshot.data!.docs[index].id,
+                            // blogSnapshot.docs[index].id,
+                          );
+                        });
               },
-            )
-          ],
-        ),
-        body: !loaded
-            ? LoadingIndicator()
-            : ListView.builder(
-                shrinkWrap: true,
-                physics: BouncingScrollPhysics(
-                    parent: AlwaysScrollableScrollPhysics()),
-                itemCount: blogSnapshot.docs.length,
-                itemBuilder: (context, index) {
-                  return ChatHeads(
-                    blogSnapshot.docs[index].get("username"),
-                    blogSnapshot.docs[index].get("email"),
-                    blogSnapshot.docs[index].get("about"),
-                    blogSnapshot.docs[index].get("uploadedImgUrl"),
-                    blogSnapshot.docs[index].get("uid"),
-                    blogSnapshot.docs[index].id,
-                  );
-                }));
+            ),
+    );
   }
 }

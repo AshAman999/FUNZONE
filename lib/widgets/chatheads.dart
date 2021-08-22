@@ -6,7 +6,7 @@ import 'package:sizer/sizer.dart';
 
 class ChatHeads extends StatelessWidget {
   ChatHeads(this.name, this.email, this.imgurl, this.about, this.uid, this.id);
-  final String name, uid, email, imgurl, about, id;
+  final String name, email, imgurl, about, uid, id;
   String chatRoomId(String user1, String user2) {
     if (user1[0].toLowerCase().codeUnits[0] >
         user2.toLowerCase().codeUnits[0]) {
@@ -44,7 +44,6 @@ class ChatHeads extends StatelessWidget {
               );
             },
             child: Container(
-              
               decoration: BoxDecoration(
                 color: Colors.white,
                 borderRadius: BorderRadius.only(
@@ -61,15 +60,22 @@ class ChatHeads extends StatelessWidget {
                   ),
                 ],
               ),
-              margin: EdgeInsets.only(top: 1.2.h),
-              height: 15.h,
+              margin: EdgeInsets.fromLTRB(10, 3, 10, 3),
+              height: 12.h,
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: [
                   Container(
-                    padding: EdgeInsets.only(left: 8.w),
-                    child:
-                        CircleAvatar(child: Image(image: NetworkImage(imgurl))),
+                    margin: EdgeInsets.only(left: 5.w),
+                    width: 50.0,
+                    height: 50.0,
+                    decoration: new BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: new DecorationImage(
+                        fit: BoxFit.fill,
+                        image: new NetworkImage(imgurl),
+                      ),
+                    ),
                   ),
                   Container(
                     margin: EdgeInsets.symmetric(horizontal: 8.w),
@@ -78,9 +84,11 @@ class ChatHeads extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Text(
-                          FirebaseAuth.instance.currentUser!.uid == uid? "You":name,
+                          FirebaseAuth.instance.currentUser!.uid == uid
+                              ? "You"
+                              : name,
                           style: TextStyle(
-                            color: Colors.black,
+                            color: Colors.lightBlueAccent,
                             fontWeight: FontWeight.bold,
                             fontSize: 20,
                           ),
@@ -96,25 +104,13 @@ class ChatHeads extends StatelessWidget {
                     ),
                   ),
                   SizedBox(
-                    width: 8.w,
+                    width: 15.w,
                   ),
-                  Row(
-                    children: [
-                      Icon(
-                        Icons.person_add,
-                        size: 30,
-                        color: Colors.green,
-                      ),
-                      Padding(
-                        padding: EdgeInsets.symmetric(horizontal: 1.w),
-                      ),
-                      Icon(
-                        Icons.delete_forever,
-                        color: Colors.red,
-                        size: 30,
-                      ),
-                    ],
-                  )
+                  Icon(
+                    Icons.message,
+                    size: 30,
+                    color: Colors.lightBlueAccent,
+                  ),
                 ],
               ),
             ),

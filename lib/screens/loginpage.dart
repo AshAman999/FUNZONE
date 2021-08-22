@@ -2,11 +2,14 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
 import 'package:funzone/main.dart';
+import 'package:funzone/screens/custimize.dart';
+import 'package:funzone/screens/lobby.dart';
 
 const users = const {
   'dribbble@gmail.com': '12345',
   'hunter@gmail.com': 'hunter',
 };
+bool firsttime = false;
 
 class LoginScreen extends StatelessWidget {
   Duration get loginTime => Duration(milliseconds: 2250);
@@ -37,7 +40,8 @@ class LoginScreen extends StatelessWidget {
       UserCredential userCredential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(
               email: "${data.name}", password: "${data.password}");
-      return "Account Created, Please Sign In";
+      firsttime = true;
+      return "";
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
         return ('The password provided is too weak.');
@@ -65,9 +69,10 @@ class LoginScreen extends StatelessWidget {
       // logo: 'assets/images/ecorp-lightblue.png',
       onLogin: _authUser,
       onSignup: _signup,
+
       onSubmitAnimationCompleted: () {
         Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) => MyApp(),
+          builder: (context) => firsttime ? Customize() : WaitingLobby(),
         ));
       },
       onRecoverPassword: _recoverPassword,
