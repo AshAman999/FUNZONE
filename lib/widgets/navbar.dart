@@ -1,13 +1,15 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:funzone/apis/firebaseapi.dart';
 import 'package:funzone/main.dart';
-import 'package:funzone/screens/custimize.dart';
+import 'package:funzone/screens/customize.dart';
 
 FirebaseHelper firebaseHelper = FirebaseHelper();
 
 class NavDrawer extends StatelessWidget {
   final String imgurl;
-  NavDrawer(this.imgurl);
+  final String name;
+  NavDrawer(this.imgurl, this.name);
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -16,17 +18,23 @@ class NavDrawer extends StatelessWidget {
         children: <Widget>[
           DrawerHeader(
             child: Text(
-              'Fun Zone 💬',
-              style: TextStyle(color: Colors.white, fontSize: 25),
+              'FUNZONE   💬',
+              style: TextStyle(
+                  color: Colors.black,
+                  fontSize: 25,
+                  fontWeight: FontWeight.bold),
             ),
             decoration: BoxDecoration(
-                color: Colors.lightBlueAccent,
-                image: DecorationImage(
-                    fit: BoxFit.fill, image: NetworkImage(imgurl))),
+              color: Colors.lightBlueAccent,
+              image: DecorationImage(
+                  fit: BoxFit.cover, image: AssetImage("assets/logo.png")
+                  // image: NetworkImage(imgurl),
+                  ),
+            ),
           ),
           ListTile(
             leading: Icon(Icons.input),
-            title: Text('Welcome'),
+            title: Text('Welcome $name'),
             onTap: () => {},
           ),
           ListTile(

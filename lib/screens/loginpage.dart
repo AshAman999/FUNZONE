@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
 import 'package:funzone/main.dart';
-import 'package:funzone/screens/custimize.dart';
+import 'package:funzone/screens/customize.dart';
 import 'package:funzone/screens/lobby.dart';
 
 const users = const {

@@ -1,8 +1,5 @@
 import 'dart:io';
-
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
@@ -56,7 +53,7 @@ void updateuserslist() {
     "username": name,
     "email": email,
     "about": about,
-    "uid": uid.toString(),
+    "uid": uid,
     "age": age.toString(),
     "gender": gender,
   };
@@ -295,7 +292,7 @@ class _CustomizeState extends State<Customize> {
                     updatefirebaseuser();
                     updateuserslist();
                     print(uid);
-                    empty();
+                    // empty();
                     Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(

@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:funzone/apis/firebaseapi.dart';
-import 'package:funzone/main.dart';
-import 'package:funzone/screens/custimize.dart';
+import 'package:funzone/screens/customize.dart';
 import 'package:funzone/screens/loadingscreen.dart';
-import 'package:funzone/screens/navbar.dart';
+import 'package:funzone/widgets/navbar.dart';
 import 'package:funzone/widgets/chatheads.dart';
+import 'package:firebase_core/firebase_core.dart';
 
 class WaitingLobby extends StatefulWidget {
   const WaitingLobby({Key? key}) : super(key: key);
@@ -22,7 +22,7 @@ class _WaitingLobbyState extends State<WaitingLobby> {
   var stream;
   @override
   void initState() {
-    stream = _firestore.collection('users').snapshots();
+    stream = _firestore.collection("users").snapshots();
     setState(() {
       loaded = true;
     });
@@ -32,7 +32,7 @@ class _WaitingLobbyState extends State<WaitingLobby> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: NavDrawer(imageurl),
+      drawer: NavDrawer(imageurl, name),
       appBar: AppBar(
         centerTitle: true,
         backgroundColor: Colors.lightBlueAccent,
@@ -67,6 +67,8 @@ class _WaitingLobbyState extends State<WaitingLobby> {
                             snapshot.data!.docs[index].get("uploadedImgUrl"),
                             snapshot.data!.docs[index].get("about"),
                             snapshot.data!.docs[index].get("uid"),
+                            snapshot.data!.docs[index].get("age"),
+                            snapshot.data!.docs[index].get("gender"),
                             snapshot.data!.docs[index].id,
                             // blogSnapshot.docs[index].id,
                           );
