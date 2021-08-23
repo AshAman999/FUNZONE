@@ -1,6 +1,11 @@
 # funzone
+## Pre flight boarding chat app 
 
-A new Flutter project.
+
+
+
+
+Demo https://youtu.be/L_gJ0wlNrEw
 
 ## Getting Started
 
