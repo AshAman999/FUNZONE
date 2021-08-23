@@ -30,13 +30,14 @@ class ChatHeads extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: () {
-            String roomId = chatRoomId(
-                FirebaseAuth.instance.currentUser!.displayName!, name);
+            String roomId =
+                chatRoomId(FirebaseAuth.instance.currentUser!.uid, uid);
             Navigator.of(context).push(
               MaterialPageRoute(
                 builder: (_) => ChatRoom(
                   chatRoomId: roomId,
                   userMap: userMap,
+                  url: imgurl,
                 ),
               ),
             );
@@ -78,17 +79,17 @@ class ChatHeads extends StatelessWidget {
                     width: 50.0,
                     height: 50.0,
 
-                    // decoration: BoxDecoration(
-                    //   shape: BoxShape.circle,
-                    //   image: DecorationImage(
-                    //     fit: BoxFit.fill,
-                    //     image: NetworkImage(imgurl),
-                    //   ),
-                    // ),
-                    // child: CircleAvatar(
-                    //   backgroundImage: NetworkImage(imgurl.toString()),
-                    // ),
-                    child: Icon(Icons.person, color: Colors.lightBlueAccent),
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      image: DecorationImage(
+                        fit: BoxFit.fill,
+                        image: NetworkImage(imgurl),
+                      ),
+                    ),
+                    child: CircleAvatar(
+                      backgroundImage: NetworkImage(imgurl),
+                    ),
+                    // child: Icon(Icons.person, color: Colors.lightBlueAccent),
                   ),
                 ),
                 Container(

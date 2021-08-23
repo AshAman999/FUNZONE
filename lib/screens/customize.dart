@@ -34,27 +34,31 @@ void getUser() {
   uid = FirebaseAuth.instance.currentUser!.uid;
 }
 
-void updatefirebaseuser() async {
+Future<String> getdownloadurl() async {
   final refr = FirebaseStorage.instance
       .ref("uploadedImages/${randomAlphaNumeric(6)}.jpg");
   final task = refr.putFile(File(imagepath));
   final snapshot = await task.whenComplete(() {});
   imageurl = await snapshot.ref.getDownloadURL();
+  return imageurl;
+}
+
+void updatefirebaseuser(String url) async {
   var authuser = FirebaseAuth.instance.currentUser;
   authuser!.updateDisplayName(name);
   // authuser.updateEmail(email);
-  authuser.updatePhotoURL(imageurl);
+  authuser.updatePhotoURL(url);
 }
 
-void updateuserslist() {
+void updateuserslist(String url) {
   FirebaseHelper firebaseHelper = FirebaseHelper();
   Map<String, String> person = {
-    "uploadedImgUrl": imageurl.toString(),
+    "uploadedImgUrl": url,
     "username": name,
     "email": email,
     "about": about,
     "uid": uid,
-    "age": age.toString(),
+    "age": age,
     "gender": gender,
   };
   firebaseHelper
@@ -287,10 +291,11 @@ class _CustomizeState extends State<Customize> {
                 ),
                 CupertinoButton(
                   color: Colors.lightBlueAccent,
-                  onPressed: () {
+                  onPressed: () async {
                     getUser();
-                    updatefirebaseuser();
-                    updateuserslist();
+                    String url = await getdownloadurl();
+                    updatefirebaseuser(url);
+                    updateuserslist(url);
                     print(uid);
                     // empty();
                     Navigator.pushReplacement(

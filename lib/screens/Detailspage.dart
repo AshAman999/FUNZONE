@@ -4,8 +4,8 @@ import 'package:sizer/sizer.dart';
 
 class DetailsPage extends StatelessWidget {
   DetailsPage(
-      this.name, this.email, this.about, this.imageurl, this.gender, this.age);
-  final String name, email, about, imageurl, gender, age;
+      this.name, this.email, this.about, this.imageurl, this.age, this.gender);
+  final String name, email, about, imageurl, age, gender;
 
   @override
   Widget build(BuildContext context) {

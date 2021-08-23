@@ -18,7 +18,7 @@ class NavDrawer extends StatelessWidget {
         children: <Widget>[
           DrawerHeader(
             child: Text(
-              'FUNZONE   💬',
+              ' ',
               style: TextStyle(
                   color: Colors.black,
                   fontSize: 25,
@@ -27,19 +27,26 @@ class NavDrawer extends StatelessWidget {
             decoration: BoxDecoration(
               color: Colors.lightBlueAccent,
               image: DecorationImage(
-                  fit: BoxFit.cover, image: AssetImage("assets/logo.png")
-                  // image: NetworkImage(imgurl),
-                  ),
+                fit: BoxFit.cover,
+                image: NetworkImage(
+                    FirebaseAuth.instance.currentUser!.photoURL.toString()),
+              ),
             ),
           ),
           ListTile(
             leading: Icon(Icons.input),
-            title: Text('Welcome $name'),
+            title:
+                Text(FirebaseAuth.instance.currentUser!.displayName.toString()),
+            onTap: () => {},
+          ),
+          ListTile(
+            leading: Icon(Icons.email),
+            title: Text(FirebaseAuth.instance.currentUser!.email.toString()),
             onTap: () => {},
           ),
           ListTile(
             leading: Icon(Icons.verified_user),
-            title: Text('Profile'),
+            title: Text('Edit Profile'),
             onTap: () => {
               Navigator.of(context).push(
                 MaterialPageRoute(

@@ -6,8 +6,9 @@ import 'package:flutter/material.dart';
 class ChatRoom extends StatelessWidget {
   final Map<String, dynamic>? userMap;
   final String? chatRoomId;
+  final String? url;
 
-  ChatRoom({this.chatRoomId, this.userMap});
+  ChatRoom({this.chatRoomId, this.userMap, this.url});
 
   final TextEditingController _message = TextEditingController();
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -39,6 +40,7 @@ class ChatRoom extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
+        // leading: CircleAvatar(backgroundImage: NetworkImage(url.toString())),
         backgroundColor: Colors.lightBlueAccent,
         title: StreamBuilder<DocumentSnapshot>(
           stream:
@@ -48,6 +50,10 @@ class ChatRoom extends StatelessWidget {
               return Container(
                 child: Row(
                   children: [
+                    CircleAvatar(backgroundImage: NetworkImage(url.toString())),
+                    SizedBox(
+                      width: 15,
+                    ),
                     Text(userMap!['name']),
                   ],
                 ),
