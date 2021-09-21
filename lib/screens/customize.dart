@@ -49,6 +49,8 @@ void updatefirebaseuser(String url) async {
   // authuser.updateEmail(email);
   authuser.updatePhotoURL(url);
 }
+// ignore: todo
+// TODO  change this method for the bug fix
 
 void updateuserslist(String url) {
   FirebaseHelper firebaseHelper = FirebaseHelper();
@@ -61,6 +63,7 @@ void updateuserslist(String url) {
     "age": age,
     "gender": gender,
   };
+
   firebaseHelper
       // .addUser(Person(name, about, email, uid, imageurl, friends))
       .addUser(person)
@@ -133,48 +136,51 @@ class _CustomizeState extends State<Customize> {
                   onTap: () {
                     selectimage();
                   },
-                  child: Container(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.grey[300],
-                    ),
-                    height: 30.h,
-                    width: 35.w,
-                    child: ClipRRect(
-                      borderRadius: BorderRadius.circular(8.0),
-                      child: imagepath == ""
-                          ? Column(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Icon(
-                                  Icons.add_a_photo_outlined,
-                                  color: Colors.black26,
-                                ),
-                                SizedBox(
-                                  height: 2.h,
-                                ),
-                                Text(
-                                  "Select a photo from the device",
-                                  style: TextStyle(
-                                    color: Colors.grey,
-                                    fontSize: 10,
-                                  ),
-                                ),
-                              ],
-                            )
-                          : ClipRRect(
+                  child: imagepath == ""
+                      ? Container(
+                          decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            color: Colors.grey[300],
+                          ),
+                          height: 30.h,
+                          width: 35.w,
+                          child: ClipRRect(
                               borderRadius: BorderRadius.circular(8.0),
-                              child: Container(
-                                height: 20.h,
-                                width: 16.w,
-                                child: Image.file(
-                                  File(imagepath),
-                                  fit: BoxFit.cover,
-                                ),
-                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.add_a_photo_outlined,
+                                    color: Colors.black26,
+                                  ),
+                                  SizedBox(
+                                    height: 2.h,
+                                  ),
+                                  Text(
+                                    "Select a photo from the device",
+                                    style: TextStyle(
+                                      color: Colors.grey,
+                                      fontSize: 10,
+                                    ),
+                                  ),
+                                ],
+                              )))
+                      : Container(
+                          // decoration: new BoxDecoration(
+                          //   shape: BoxShape.circle,
+                          //   color: Colors.green,
+                          // ),
+                          height: 40.w,
+                          width: 40.w,
+                          child: ClipOval(
+                            child: Image.file(
+                              File(imagepath),
+                              fit: BoxFit.cover,
+                              // height: 10.h,
+                              // width: 10.h,
                             ),
-                    ),
-                  ),
+                          ),
+                        ),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,

@@ -2,10 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:funzone/screens/Detailspage.dart';
 import 'package:funzone/screens/chatpage.dart';
-import 'package:funzone/screens/customize.dart';
 import 'package:sizer/sizer.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_core/firebase_core.dart';
 
 class ChatHeads extends StatelessWidget {
   ChatHeads(this.name, this.email, this.imgurl, this.about, this.uid, this.id,

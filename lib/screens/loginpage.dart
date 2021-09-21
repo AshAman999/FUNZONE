@@ -1,7 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
-import 'package:funzone/main.dart';
 import 'package:funzone/screens/customize.dart';
 import 'package:funzone/screens/lobby.dart';
 
@@ -18,6 +17,7 @@ class LoginScreen extends StatelessWidget {
     print('Name: ${data.name}, Password: ${data.password}');
     return Future.delayed(loginTime).then((_) async {
       try {
+        // ignore: unused_local_variable
         UserCredential userCredential =
             await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: "${data.name}",
@@ -37,6 +37,7 @@ class LoginScreen extends StatelessWidget {
 
   Future<String> _signup(LoginData data) async {
     try {
+      // ignore: unused_local_variable
       UserCredential userCredential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(
               email: "${data.name}", password: "${data.password}");
