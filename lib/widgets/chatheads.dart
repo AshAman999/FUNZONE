@@ -90,7 +90,7 @@ class ChatHeads extends StatelessWidget {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.symmetric(horizontal: 8.w),
+                  margin: EdgeInsets.symmetric(horizontal: 4.w),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -106,7 +106,7 @@ class ChatHeads extends StatelessWidget {
                         ),
                       ),
                       Text(
-                        "How is it Going",
+                        "Tap to send a message",
                         style: TextStyle(
                             color: Colors.grey,
                             fontSize: 20,
@@ -116,7 +116,7 @@ class ChatHeads extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  width: 15.w,
+                  width: 5.w,
                 ),
                 Icon(
                   Icons.message,

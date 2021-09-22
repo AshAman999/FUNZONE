@@ -312,7 +312,7 @@ class _CustomizeState extends State<Customize> {
                     );
                     // print(name + about + imageurl + gender + age + email);
                   },
-                  child: Text("Next"),
+                  child: Text("Update "),
                 ),
               ],
             ),

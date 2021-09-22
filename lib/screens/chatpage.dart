@@ -68,6 +68,12 @@ class ChatRoom extends StatelessWidget {
         child: Column(
           children: [
             Container(
+              decoration: BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage("assets/back_ground.jpg"),
+                  fit: BoxFit.cover,
+                ),
+              ),
               height: size.height / 1.25,
               width: size.width,
               child: StreamBuilder<QuerySnapshot>(
