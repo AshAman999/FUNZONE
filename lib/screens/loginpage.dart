@@ -1,3 +1,5 @@
+import 'dart:convert';
+import 'package:crypto/crypto.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
@@ -15,13 +17,16 @@ class LoginScreen extends StatelessWidget {
 
   Future<String> _authUser(LoginData data) {
     print('Name: ${data.name}, Password: ${data.password}');
+    var bytes = utf8.encode("${data.password}"); // data being hashed
+    var digest = sha256.convert(bytes);
+    print(digest.toString());
     return Future.delayed(loginTime).then((_) async {
       try {
         // ignore: unused_local_variable
         UserCredential userCredential =
             await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: "${data.name}",
-          password: "${data.password}",
+          password: "${digest.toString()}",
         );
         return "";
       } on FirebaseAuthException catch (e) {
@@ -38,9 +43,12 @@ class LoginScreen extends StatelessWidget {
   Future<String> _signup(LoginData data) async {
     try {
       // ignore: unused_local_variable
+      var bytes = utf8.encode("${data.password}"); // data being hashed
+      var digest = sha256.convert(bytes);
+      print(digest.toString());
       UserCredential userCredential = await FirebaseAuth.instance
           .createUserWithEmailAndPassword(
-              email: "${data.name}", password: "${data.password}");
+              email: "${data.name}", password: digest.toString());
       firsttime = true;
       return "";
     } on FirebaseAuthException catch (e) {
