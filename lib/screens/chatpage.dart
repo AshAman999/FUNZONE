@@ -1,24 +1,39 @@
 import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:crypton/crypton.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+String privateKey = '';
 
 class ChatRoom extends StatelessWidget {
   final Map<String, dynamic>? userMap;
   final String? chatRoomId;
   final String? url;
+  final String publicKey;
 
-  ChatRoom({this.chatRoomId, this.userMap, this.url});
+  ChatRoom({this.chatRoomId, this.userMap, this.url, required this.publicKey});
 
   final TextEditingController _message = TextEditingController();
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   final FirebaseAuth _auth = FirebaseAuth.instance;
+  Future<void> getPrivateKey() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    var key = await prefs.getString('privateKey').toString();
+    privateKey = key;
+  }
 
-  void onSendMessage() async {
+  void onSendMessage(String publicKey) async {
+    print(publicKey + 'its the pkey');
+    String encrypted_messages = await RSAPublicKey.fromString(publicKey)
+        .encrypt(_message.text)
+        .toString();
+    print(encrypted_messages);
     if (_message.text.isNotEmpty) {
       Map<String, dynamic> messages = {
         "sendby": _auth.currentUser!.displayName,
-        "message": _message.text,
+        "message": encrypted_messages,
         "time": FieldValue.serverTimestamp(),
       };
 
@@ -37,6 +52,7 @@ class ChatRoom extends StatelessWidget {
   Widget build(BuildContext context) {
     final size = MediaQuery.of(context).size;
     final _controller = ScrollController();
+    getPrivateKey();
 
     return Scaffold(
       appBar: AppBar(
@@ -135,7 +151,9 @@ class ChatRoom extends StatelessWidget {
                     Container(
                       child: IconButton(
                         icon: Icon(Icons.send),
-                        onPressed: onSendMessage,
+                        onPressed: () {
+                          onSendMessage(publicKey);
+                        },
                         color: Colors.lightBlueAccent,
                       ),
                     ),
@@ -173,7 +191,11 @@ class ChatRoom extends StatelessWidget {
           ],
         ),
         child: Text(
-          map['message'],
+          map['sendby'] != _auth.currentUser!.displayName
+              ? RSAPrivateKey.fromString(privateKey)
+                  .decrypt(map['message'])
+                  .toString()
+              : map['message'],
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w500,
@@ -184,6 +206,8 @@ class ChatRoom extends StatelessWidget {
     );
   }
 }
+
+
 
 
 /// this is it
