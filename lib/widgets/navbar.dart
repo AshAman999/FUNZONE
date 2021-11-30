@@ -9,7 +9,9 @@ FirebaseHelper firebaseHelper = FirebaseHelper();
 class NavDrawer extends StatelessWidget {
   final String imgurl;
   final String name;
-  NavDrawer(this.imgurl, this.name);
+  final String publicKey;
+
+  NavDrawer(this.imgurl, this.name, this.publicKey);
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -50,7 +52,9 @@ class NavDrawer extends StatelessWidget {
             onTap: () => {
               Navigator.of(context).push(
                 MaterialPageRoute(
-                  builder: (context) => Customize(),
+                  builder: (context) => Customize(
+                    publickey: publicKey,
+                  ),
                 ),
               ),
             },
@@ -83,5 +87,6 @@ class NavDrawer extends StatelessWidget {
         ],
       ),
     );
+  
   }
 }

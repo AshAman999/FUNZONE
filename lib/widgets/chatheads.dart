@@ -5,9 +5,9 @@ import 'package:funzone/screens/chatpage.dart';
 import 'package:sizer/sizer.dart';
 
 class ChatHeads extends StatelessWidget {
+  final String name, email, age, gender, imgurl, about, uid, id, publicKey;
   ChatHeads(this.name, this.email, this.imgurl, this.about, this.uid, this.id,
-      this.age, this.gender);
-  final String name, email, age, gender, imgurl, about, uid, id;
+      this.age, this.gender, this.publicKey);
   String chatRoomId(String user1, String user2) {
     if (user1[0].toLowerCase().codeUnits[0] >
         user2.toLowerCase().codeUnits[0]) {
@@ -22,6 +22,7 @@ class ChatHeads extends StatelessWidget {
     final Map<String, String> userMap = {
       "uid": uid,
       "name": name,
+      "publicKey": publicKey,
     };
     return Column(
       children: [
@@ -35,6 +36,7 @@ class ChatHeads extends StatelessWidget {
                   chatRoomId: roomId,
                   userMap: userMap,
                   url: imgurl,
+                  publicKey: publicKey,
                 ),
               ),
             );
@@ -67,7 +69,13 @@ class ChatHeads extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) => DetailsPage(
-                            name, email, about, imgurl, gender, age),
+                          name,
+                          email,
+                          about,
+                          imgurl,
+                          gender,
+                          age,
+                        ),
                       ),
                     );
                   },
