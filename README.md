@@ -31,6 +31,10 @@ Demo https://youtu.be/L_gJ0wlNrEw
 | Login/Sign up Page         | flutter login           |
 | storage         | Goole Cloud Storage          |
 | app icons        | Canva                        |
+| Encryption         | Passwords hashed with SHA-256         |
+| Speciality         | End to end encrypted messages       |
+
+
 
 ## Features
 
