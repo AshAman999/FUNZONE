@@ -13,7 +13,7 @@ void main() async {
   // RSAKeypair rsaKeypair = RSAKeypair.fromRandom();
   // var publicKey = RSAPublicKey.fromString(rsaKeypair.publicKey.toString());
   // print(rsaKeypair.publicKey);
-  // String message = 'amanlovesyou';
+  // String message = 'test message for check';
   // String encrypted = publicKey.encrypt(message);
   // String decrypted = rsaKeypair.privateKey.decrypt(encrypted);
   // print(encrypted);
