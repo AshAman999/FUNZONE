@@ -10,8 +10,13 @@ import 'package:image_picker/image_picker.dart';
 import 'package:sizer/sizer.dart';
 import 'package:random_string/random_string.dart';
 
+bool loading = false;
+
 class Customize extends StatefulWidget {
-  const Customize({Key? key}) : super(key: key);
+  final String publickey;
+  Customize({
+    required this.publickey,
+  });
 
   @override
   _CustomizeState createState() => _CustomizeState();
@@ -52,7 +57,7 @@ void updatefirebaseuser(String url) async {
 // ignore: todo
 // TODO  change this method for the bug fix
 
-void updateuserslist(String url) {
+void updateuserslist(String url, String publicKey) {
   FirebaseHelper firebaseHelper = FirebaseHelper();
   Map<String, String> person = {
     "uploadedImgUrl": url,
@@ -62,7 +67,10 @@ void updateuserslist(String url) {
     "uid": uid,
     "age": age,
     "gender": gender,
+    "publicKey": publicKey,
   };
+
+  // firebaseHelper.
 
   firebaseHelper
       // .addUser(Person(name, about, email, uid, imageurl, friends))
@@ -295,25 +303,49 @@ class _CustomizeState extends State<Customize> {
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 1.h),
                 ),
-                CupertinoButton(
-                  color: Colors.lightBlueAccent,
-                  onPressed: () async {
-                    getUser();
-                    String url = await getdownloadurl();
-                    updatefirebaseuser(url);
-                    updateuserslist(url);
-                    print(uid);
-                    // empty();
-                    Navigator.pushReplacement(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => WaitingLobby(),
+                loading
+                    ? CircularProgressIndicator(
+                        color: Colors.lightBlueAccent,
+                      )
+                    : CupertinoButton(
+                        color: Colors.lightBlueAccent,
+                        onPressed: () async {
+                          if (imagepath == "") {
+                            //show snackbar and return
+                            ScaffoldMessenger.of(context).showSnackBar(
+                              SnackBar(
+                                content:
+                                    Text('Please select an image to continue'),
+                              ),
+                            );
+                            return;
+                          }
+
+                          setState(() {
+                            loading = true;
+                          });
+                          getUser();
+                          String url = await getdownloadurl();
+                          updatefirebaseuser(url);
+                          updateuserslist(url, widget.publickey);
+                          print(uid);
+                          setState(() {
+                            loading = false;
+                          });
+                          // empty();
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => WaitingLobby(
+                                publickey: widget.publickey,
+                              ),
+                            ),
+                          );
+
+                          // print(name + about + imageurl + gender + age + email);
+                        },
+                        child: Text("Update "),
                       ),
-                    );
-                    // print(name + about + imageurl + gender + age + email);
-                  },
-                  child: Text("Update "),
-                ),
               ],
             ),
           ),
