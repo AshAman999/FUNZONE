@@ -46,15 +46,6 @@ class _WaitingLobbyState extends State<WaitingLobby> {
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
         ),
         // foregroundColor: Colors.transparent,
-        leading: InkWell(
-          onTap: () {
-            Scaffold.of(context).openDrawer();
-          },
-          child: Icon(
-            Icons.menu,
-            // size: appBarMenuIconSize,
-          ),
-        ),
       ),
       body: Container(
         decoration: BoxDecoration(
