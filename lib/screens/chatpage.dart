@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 String privateKey = '';
+String userPublicKey = '';
 
 class ChatRoom extends StatelessWidget {
   final Map<String, dynamic>? userMap;
@@ -21,7 +22,9 @@ class ChatRoom extends StatelessWidget {
   Future<void> getPrivateKey() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     var key = await prefs.getString('privateKey').toString();
+    var key2 = await prefs.getString('publicKey').toString();
     privateKey = key;
+    userPublicKey = key2;
   }
 
   void onSendMessage(String publicKey) async {
@@ -29,11 +32,16 @@ class ChatRoom extends StatelessWidget {
     String encrypted_messages = await RSAPublicKey.fromString(publicKey)
         .encrypt(_message.text)
         .toString();
+    String encrypted_messages_for_sender =
+        await RSAPublicKey.fromString(userPublicKey)
+            .encrypt(_message.text)
+            .toString();
     print(encrypted_messages);
     if (_message.text.isNotEmpty) {
       Map<String, dynamic> messages = {
         "sendby": _auth.currentUser!.displayName,
         "message": encrypted_messages,
+        "message_for_sender": encrypted_messages_for_sender,
         "time": FieldValue.serverTimestamp(),
       };
 
@@ -193,9 +201,13 @@ class ChatRoom extends StatelessWidget {
         child: Text(
           map['sendby'] != _auth.currentUser!.displayName
               ? RSAPrivateKey.fromString(privateKey)
-                  .decrypt(map['message'])
+                  .decrypt(
+                    map['message'],
+                  )
                   .toString()
-              : map['message'],
+              : RSAPrivateKey.fromString(privateKey)
+                  .decrypt(map['message_for_sender'],)
+                  .toString(),
           style: TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.w500,
