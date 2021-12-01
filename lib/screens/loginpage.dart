@@ -1,16 +1,30 @@
+// ignore_for_file: unused_local_variable
+
 import 'dart:convert';
 import 'package:crypto/crypto.dart';
+import 'package:crypton/crypton.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_login/flutter_login.dart';
 import 'package:funzone/screens/customize.dart';
 import 'package:funzone/screens/lobby.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 const users = const {
   'dribbble@gmail.com': '12345',
   'hunter@gmail.com': 'hunter',
 };
 bool firsttime = false;
+RSAKeypair rsaKeypair = RSAKeypair.fromRandom();
+// var publicKey = RSAPublicKey.fromString(rsaKeypair.publicKey.toString());
+// print(rsaKeypair.publicKey);
+String rsaPublicKey = rsaKeypair.publicKey.toString();
+String rsaPrivateKey = rsaKeypair.privateKey.toString();
+String message = 'this is check messages';
+String encrypted = rsaKeypair.publicKey.encrypt(message);
+String decrypted = rsaKeypair.privateKey.decrypt(encrypted);
+// print(encrypted);
+// print(decrypted);
 
 class LoginScreen extends StatelessWidget {
   Duration get loginTime => Duration(milliseconds: 2250);
@@ -22,7 +36,6 @@ class LoginScreen extends StatelessWidget {
     print(digest.toString());
     return Future.delayed(loginTime).then((_) async {
       try {
-        // ignore: unused_local_variable
         UserCredential userCredential =
             await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: "${data.name}",
@@ -42,7 +55,6 @@ class LoginScreen extends StatelessWidget {
 
   Future<String> _signup(LoginData data) async {
     try {
-      // ignore: unused_local_variable
       var bytes = utf8.encode("${data.password}"); // data being hashed
       var digest = sha256.convert(bytes);
       print(digest.toString());
@@ -50,6 +62,9 @@ class LoginScreen extends StatelessWidget {
           .createUserWithEmailAndPassword(
               email: "${data.name}", password: digest.toString());
       firsttime = true;
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      await prefs.setString('privateKey', rsaPrivateKey);
+      await prefs.setString('publicKey', rsaPublicKey);
       return "";
     } on FirebaseAuthException catch (e) {
       if (e.code == 'weak-password') {
@@ -80,8 +95,15 @@ class LoginScreen extends StatelessWidget {
       onSignup: _signup,
 
       onSubmitAnimationCompleted: () {
+        print(rsaPublicKey + "public key");
         Navigator.of(context).pushReplacement(MaterialPageRoute(
-          builder: (context) => firsttime ? Customize() : WaitingLobby(),
+          builder: (context) => firsttime
+              ? Customize(
+                  publickey: rsaPublicKey,
+                )
+              : WaitingLobby(
+                  publickey: rsaPublicKey,
+                ),
         ));
       },
       onRecoverPassword: _recoverPassword,
