@@ -1,10 +1,10 @@
 # funzone
 
 
-## Pre flight boarding chat app 
+## Flow Diagram 
 
-![enter image description here](https://raw.githubusercontent.com/AshAman999/FUNZONE/main/assets/chatscreen.jpg)
-
+<!-- ![enter image description here](https://raw.githubusercontent.com/AshAman999/FUNZONE/main/assets/chatscreen.jpg) -->
+![enter image description here](https://raw.githubusercontent.com/AshAman999/FUNZONE/main/diagram.drawio.png)
 
 
 
