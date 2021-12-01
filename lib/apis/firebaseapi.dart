@@ -8,12 +8,61 @@ class FirebaseHelper {
   // ignore: non_constant_identifier_names
   Future<void> addUser(person) async {
     print(person);
+// find the user if it exits edit the same
     FirebaseFirestore.instance
         .collection("users")
-        .add(person)
-        .then((value) => print(value))
-        .catchError((e) {
-      print(e);
+        .where("uid", isEqualTo: person["uid"])
+        .get()
+        .then((value) {
+      if (value.docs.isNotEmpty) {
+        FirebaseFirestore.instance
+            .collection("users")
+            .doc(value.docs.first.id)
+            .update(person)
+            .then((value) {
+          print(person);
+        }).catchError((e) {
+          print(e);
+        });
+      } else {
+        FirebaseFirestore.instance
+            .collection("users")
+            .add(person)
+            .then((value) => print(value))
+            .catchError((e) {
+          print(e);
+        });
+      }
+    });
+  }
+
+  Future<void> updateUser(person) async {
+    print(person);
+// find the user if it exits edit the same
+    FirebaseFirestore.instance
+        .collection("users")
+        .where("email", isEqualTo: person["email"])
+        .get()
+        .then((value) {
+      if (value.docs.isNotEmpty) {
+        FirebaseFirestore.instance
+            .collection("users")
+            .doc(value.docs.first.id)
+            .update(person)
+            .then((value) {
+          print(person);
+        }).catchError((e) {
+          print(e);
+        });
+      } else {
+        FirebaseFirestore.instance
+            .collection("users")
+            .add(person)
+            .then((value) => print(value))
+            .catchError((e) {
+          print(e);
+        });
+      }
     });
   }
 
