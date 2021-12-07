@@ -124,7 +124,7 @@ class ChatHeads extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  width: 5.w,
+                  width: 4.w,
                 ),
                 Icon(
                   Icons.message,
