@@ -10,15 +10,6 @@ String publicKey = "";
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  // RSAKeypair rsaKeypair = RSAKeypair.fromRandom();
-  // var publicKey = RSAPublicKey.fromString(rsaKeypair.publicKey.toString());
-  // print(rsaKeypair.publicKey);
-  // String message = 'test message for check';
-  // String encrypted = publicKey.encrypt(message);
-  // String decrypted = rsaKeypair.privateKey.decrypt(encrypted);
-  // print(encrypted);
-  // print(decrypted);
-
   runApp(MyApp());
 }
 
@@ -55,10 +46,6 @@ Future<void> getPublicKey() async {
   } else {
     publicKey = publicKey2;
   }
-
-  // SharedPreferences prefs = await SharedPreferences.getInstance();
-  // int counter = (prefs.getInt('counter') ?? 0) + 1;
-  // return counter;
 }
 
 class MyHomePage extends StatefulWidget {
@@ -90,26 +77,3 @@ class _MyHomePageState extends State<MyHomePage> {
   }
 }
 
-
-// Scaffold(
-//       appBar: AppBar(
-//         title: Text(widget.title),
-//       ),
-//       body: Center(
-//         child: Column(
-//           mainAxisAlignment: MainAxisAlignment.center,
-//           children: <Widget>[
-//             Text(
-//               'You have pushed the button this many times:',
-//             ),
-//             Text(
-//               '_counter',
-//               style: Theme.of(context).textTheme.headline4,
-//             ),
-//           ],
-//         ),
-//       ),
-//       floatingActionButton: FloatingActionButton(
-//         onPressed: null,
-//         tooltip: 'Increment',
-//         child: Icon(Icons.add),
