@@ -25,7 +25,6 @@ class MyApp extends StatelessWidget {
       return MaterialApp(
         title: 'Fun Zone ',
         debugShowCheckedModeBanner: false,
-        // home: MyHomePage(title: 'A clutter free social media'),
         home: (currentUser != null)
             ? WaitingLobby(
                 publickey: publicKey.toString(),
@@ -76,4 +75,3 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
-

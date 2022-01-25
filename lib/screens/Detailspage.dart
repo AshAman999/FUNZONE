@@ -13,26 +13,7 @@ class DetailsPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: Colors.lightBlueAccent,
         title: Text(" Profile"),
-        actions: [
-          // GestureDetector(
-          //   child: Center(
-          //     child: Container(
-          //         padding: EdgeInsets.symmetric(horizontal: 5),
-          //         child: Text(
-          //           "Skip",
-          //           style: TextStyle(fontSize: 12.sp, color: Colors.white),
-          //         )),
-          //   ),
-          //   onTap: () {
-          //     Navigator.pushReplacement(
-          //       context,
-          //       MaterialPageRoute(
-          //         builder: (context) => WaitingLobby(),
-          //       ),
-          //     );
-          //   },
-          // )
-        ],
+        actions: [],
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -45,15 +26,16 @@ class DetailsPage extends StatelessWidget {
                   padding: EdgeInsets.all(20),
                 ),
                 Container(
-                    decoration: BoxDecoration(
-                      shape: BoxShape.circle,
-                      color: Colors.grey[300],
-                    ),
-                    height: 30.h,
-                    width: 35.w,
-                    child: CircleAvatar(
-                      backgroundImage: NetworkImage(imageurl),
-                    )),
+                  decoration: BoxDecoration(
+                    shape: BoxShape.circle,
+                    color: Colors.grey[300],
+                  ),
+                  height: 30.h,
+                  width: 35.w,
+                  child: CircleAvatar(
+                    backgroundImage: NetworkImage(imageurl),
+                  ),
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -68,13 +50,11 @@ class DetailsPage extends StatelessWidget {
                   ],
                 ),
                 CupertinoTextField(
-                    enabled: false,
-                    autocorrect: false,
-                    textCapitalization: TextCapitalization.words,
-                    placeholder: name,
-                    onChanged: (value) {
-                      // name = value;
-                    }),
+                  enabled: false,
+                  autocorrect: false,
+                  textCapitalization: TextCapitalization.words,
+                  placeholder: name,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -89,12 +69,10 @@ class DetailsPage extends StatelessWidget {
                   ],
                 ),
                 CupertinoTextField(
-                    enabled: false,
-                    placeholder: email,
-                    keyboardType: TextInputType.emailAddress,
-                    onChanged: (value) {
-                      // email = value;
-                    }),
+                  enabled: false,
+                  placeholder: email,
+                  keyboardType: TextInputType.emailAddress,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -111,13 +89,11 @@ class DetailsPage extends StatelessWidget {
                         Container(
                           width: 15.w,
                           child: CupertinoTextField(
-                              enabled: false,
-                              placeholder: age,
-                              maxLength: 3,
-                              keyboardType: TextInputType.number,
-                              onChanged: (value) {
-                                // age = value;
-                              }),
+                            enabled: false,
+                            placeholder: age,
+                            maxLength: 3,
+                            keyboardType: TextInputType.number,
+                          ),
                         ),
                       ],
                     ),
@@ -134,14 +110,12 @@ class DetailsPage extends StatelessWidget {
                         Container(
                           width: 15.w,
                           child: CupertinoTextField(
-                              enabled: false,
-                              placeholder: gender,
-                              autofillHints: [],
-                              maxLength: 1,
-                              keyboardType: TextInputType.text,
-                              onChanged: (value) {
-                                // gender = value;
-                              }),
+                            enabled: false,
+                            placeholder: gender,
+                            autofillHints: [],
+                            maxLength: 1,
+                            keyboardType: TextInputType.text,
+                          ),
                         ),
                       ],
                     ),
@@ -160,14 +134,11 @@ class DetailsPage extends StatelessWidget {
                   ],
                 ),
                 CupertinoTextField(
-                    //remove the border
-                    enabled: false,
-                    textCapitalization: TextCapitalization.words,
-                    placeholder: about,
-                    maxLines: 5,
-                    onChanged: (value) {
-                      // about = value;
-                    }),
+                  enabled: false,
+                  textCapitalization: TextCapitalization.words,
+                  placeholder: about,
+                  maxLines: 5,
+                ),
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 1.h),
                 ),

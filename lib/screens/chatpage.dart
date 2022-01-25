@@ -64,7 +64,6 @@ class ChatRoom extends StatelessWidget {
 
     return Scaffold(
       appBar: AppBar(
-        // leading: CircleAvatar(backgroundImage: NetworkImage(url.toString())),
         backgroundColor: Colors.lightBlueAccent,
         title: StreamBuilder<DocumentSnapshot>(
           stream:
@@ -206,7 +205,9 @@ class ChatRoom extends StatelessWidget {
                   )
                   .toString()
               : RSAPrivateKey.fromString(privateKey)
-                  .decrypt(map['message_for_sender'],)
+                  .decrypt(
+                    map['message_for_sender'],
+                  )
                   .toString(),
           style: TextStyle(
             fontSize: 16,
