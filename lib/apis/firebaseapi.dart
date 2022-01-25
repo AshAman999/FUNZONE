@@ -2,9 +2,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class FirebaseHelper {
-// Future <void> addBlog(blodData)async{
-//   Firebase.
-
   // ignore: non_constant_identifier_names
   Future<void> addUser(person) async {
     print(person);
@@ -83,12 +80,6 @@ class FirebaseHelper {
   void logout() {
     FirebaseAuth.instance.signOut();
   } // ignore: non_constant_identifier_names
-
-  //delete a post
-
-  // delete(id) async {
-  //   await FirebaseFirestore.instance.collection("blogs").doc(id).delete();
-  // }
 
   getfriends(person) async {
     return await FirebaseFirestore.instance
