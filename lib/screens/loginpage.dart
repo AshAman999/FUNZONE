@@ -53,7 +53,7 @@ class LoginScreen extends StatelessWidget {
     });
   }
 
-  Future<String> _signup(LoginData data) async {
+  Future<String> _signup(SignupData data) async {
     try {
       var bytes = utf8.encode("${data.password}"); // data being hashed
       var digest = sha256.convert(bytes);
