@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:funzone/Models/Profile.dart';
 import 'package:funzone/apis/firebaseapi.dart';
 import 'package:funzone/screens/lobby.dart';
@@ -107,29 +107,57 @@ class _CustomizeState extends State<Customize> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: Colors.lightBlueAccent,
-        title: Text("Edit Profile"),
-        actions: [
-          // GestureDetector(
-          //   child: Center(
-          //     child: Container(
-          //         padding: EdgeInsets.symmetric(horizontal: 5),
-          //         child: Text(
-          //           "Skip",
-          //           style: TextStyle(fontSize: 12.sp, color: Colors.white),
-          //         )),
-          //   ),
-          //   onTap: () {
-          //     Navigator.pushReplacement(
-          //       context,
-          //       MaterialPageRoute(
-          //         builder: (context) => WaitingLobby(),
-          //       ),
-          //     );
-          //   },
-          // )
-        ],
+        title: Neumorphic(
+          padding: EdgeInsets.all(10),
+          style: NeumorphicStyle(
+            boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(10)),
+            depth: -5,
+            color: Colors.lightBlueAccent,
+          ),
+          child: Text(
+            "Edit Profile",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 18,
+            ),
+          ),
+        ),
+        // leading round back button
+        leading: Neumorphic(
+          padding: EdgeInsets.all(10),
+          style: NeumorphicStyle(
+            boxShape: NeumorphicBoxShape.circle(),
+            depth: -10,
+            color: Colors.lightBlueAccent,
+          ),
+          child: BackButton(
+            color: Colors.white,
+            onPressed: () => Navigator.pop(context),
+          ),
+        ),
       ),
+
+      // GestureDetector(
+      //   child: Center(
+      //     child: Container(
+      //         padding: EdgeInsets.symmetric(horizontal: 5),
+      //         child: Text(
+      //           "Skip",
+      //           style: TextStyle(fontSize: 12.sp, color: Colors.white),
+      //         )),
+      //   ),
+      //   onTap: () {
+      //     Navigator.pushReplacement(
+      //       context,
+      //       MaterialPageRoute(
+      //         builder: (context) => WaitingLobby(),
+      //       ),
+      //     );
+      //   },
+      // )
+
       body: SafeArea(
         child: SingleChildScrollView(
           padding: EdgeInsets.symmetric(horizontal: 20.w),
@@ -173,19 +201,26 @@ class _CustomizeState extends State<Customize> {
                                   ),
                                 ],
                               )))
-                      : Container(
-                          // decoration: new BoxDecoration(
-                          //   shape: BoxShape.circle,
-                          //   color: Colors.green,
-                          // ),
-                          height: 40.w,
-                          width: 40.w,
-                          child: ClipOval(
-                            child: Image.file(
-                              File(imagepath),
-                              fit: BoxFit.cover,
-                              // height: 10.h,
-                              // width: 10.h,
+                      : Neumorphic(
+                          style: NeumorphicStyle(
+                            color: Colors.white,
+                            depth: 10,
+                            boxShape: NeumorphicBoxShape.circle(),
+                          ),
+                          child: Container(
+                            // decoration: new BoxDecoration(
+                            //   shape: BoxShape.circle,
+                            //   color: Colors.green,
+                            // ),
+                            height: 40.w,
+                            width: 40.w,
+                            child: ClipOval(
+                              child: Image.file(
+                                File(imagepath),
+                                fit: BoxFit.cover,
+                                // height: 10.h,
+                                // width: 10.h,
+                              ),
                             ),
                           ),
                         ),
@@ -203,13 +238,15 @@ class _CustomizeState extends State<Customize> {
                     ),
                   ],
                 ),
-                CupertinoTextField(
-                    autocorrect: false,
-                    textCapitalization: TextCapitalization.words,
-                    placeholder: "Enter your name",
-                    onChanged: (value) {
-                      name = value;
-                    }),
+                Neumorphic(
+                  child: CupertinoTextField(
+                      autocorrect: false,
+                      textCapitalization: TextCapitalization.words,
+                      placeholder: "Enter your name",
+                      onChanged: (value) {
+                        name = value;
+                      }),
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
@@ -223,12 +260,14 @@ class _CustomizeState extends State<Customize> {
                     ),
                   ],
                 ),
-                CupertinoTextField(
-                    placeholder: "someome@example.com",
-                    keyboardType: TextInputType.emailAddress,
-                    onChanged: (value) {
-                      email = value;
-                    }),
+                Neumorphic(
+                  child: CupertinoTextField(
+                      placeholder: "someome@example.com",
+                      keyboardType: TextInputType.emailAddress,
+                      onChanged: (value) {
+                        email = value;
+                      }),
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
@@ -244,13 +283,15 @@ class _CustomizeState extends State<Customize> {
                         ),
                         Container(
                           width: 15.w,
-                          child: CupertinoTextField(
-                              placeholder: '23',
-                              maxLength: 3,
-                              keyboardType: TextInputType.number,
-                              onChanged: (value) {
-                                age = value;
-                              }),
+                          child: Neumorphic(
+                            child: CupertinoTextField(
+                                placeholder: '23',
+                                maxLength: 3,
+                                keyboardType: TextInputType.number,
+                                onChanged: (value) {
+                                  age = value;
+                                }),
+                          ),
                         ),
                       ],
                     ),
@@ -266,14 +307,16 @@ class _CustomizeState extends State<Customize> {
                         ),
                         Container(
                           width: 15.w,
-                          child: CupertinoTextField(
-                              placeholder: 'M/F/O',
-                              autofillHints: [],
-                              maxLength: 1,
-                              keyboardType: TextInputType.text,
-                              onChanged: (value) {
-                                gender = value;
-                              }),
+                          child: Neumorphic(
+                            child: CupertinoTextField(
+                                placeholder: 'M/F/O',
+                                autofillHints: [],
+                                maxLength: 1,
+                                keyboardType: TextInputType.text,
+                                onChanged: (value) {
+                                  gender = value;
+                                }),
+                          ),
                         ),
                       ],
                     ),
@@ -291,15 +334,17 @@ class _CustomizeState extends State<Customize> {
                     ),
                   ],
                 ),
-                CupertinoTextField(
-                    //remove the border
+                Neumorphic(
+                  child: CupertinoTextField(
+                      //remove the border
 
-                    textCapitalization: TextCapitalization.words,
-                    placeholder: "Enter a short info about you",
-                    maxLines: 5,
-                    onChanged: (value) {
-                      about = value;
-                    }),
+                      textCapitalization: TextCapitalization.words,
+                      placeholder: "Enter a short info about you",
+                      maxLines: 5,
+                      onChanged: (value) {
+                        about = value;
+                      }),
+                ),
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 1.h),
                 ),
@@ -307,44 +352,46 @@ class _CustomizeState extends State<Customize> {
                     ? CircularProgressIndicator(
                         color: Colors.lightBlueAccent,
                       )
-                    : CupertinoButton(
-                        color: Colors.lightBlueAccent,
-                        onPressed: () async {
-                          if (imagepath == "") {
-                            //show snackbar and return
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                content:
-                                    Text('Please select an image to continue'),
+                    : Neumorphic(
+                        child: CupertinoButton(
+                          color: Colors.lightBlueAccent,
+                          onPressed: () async {
+                            if (imagepath == "") {
+                              //show snackbar and return
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                SnackBar(
+                                  content: Text(
+                                      'Please select an image to continue'),
+                                ),
+                              );
+                              return;
+                            }
+
+                            setState(() {
+                              loading = true;
+                            });
+                            getUser();
+                            String url = await getdownloadurl();
+                            updatefirebaseuser(url);
+                            updateuserslist(url, widget.publickey);
+                            print(uid);
+                            setState(() {
+                              loading = false;
+                            });
+                            // empty();
+                            Navigator.pushReplacement(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => WaitingLobby(
+                                  publickey: widget.publickey,
+                                ),
                               ),
                             );
-                            return;
-                          }
 
-                          setState(() {
-                            loading = true;
-                          });
-                          getUser();
-                          String url = await getdownloadurl();
-                          updatefirebaseuser(url);
-                          updateuserslist(url, widget.publickey);
-                          print(uid);
-                          setState(() {
-                            loading = false;
-                          });
-                          // empty();
-                          Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => WaitingLobby(
-                                publickey: widget.publickey,
-                              ),
-                            ),
-                          );
-
-                          // print(name + about + imageurl + gender + age + email);
-                        },
-                        child: Text("Update "),
+                            // print(name + about + imageurl + gender + age + email);
+                          },
+                          child: Text("Update "),
+                        ),
                       ),
               ],
             ),
