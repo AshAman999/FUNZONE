@@ -2,7 +2,7 @@ import 'dart:async';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:crypton/crypton.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 String privateKey = '';
@@ -73,11 +73,39 @@ class ChatRoom extends StatelessWidget {
               return Container(
                 child: Row(
                   children: [
-                    CircleAvatar(backgroundImage: NetworkImage(url.toString())),
+                    Neumorphic(
+                      style: NeumorphicStyle(
+                        boxShape: NeumorphicBoxShape.circle(),
+                        depth: 10,
+                        color: Colors.white,
+                      ),
+                      margin: EdgeInsets.all(8),
+                      child: CircleAvatar(
+                        backgroundImage: NetworkImage(
+                          url.toString(),
+                        ),
+                      ),
+                    ),
                     SizedBox(
                       width: 15,
                     ),
-                    Text(userMap!['name']),
+                    Neumorphic(
+                      padding: EdgeInsets.all(10),
+                      style: NeumorphicStyle(
+                        boxShape: NeumorphicBoxShape.roundRect(
+                          BorderRadius.circular(10),
+                        ),
+                        depth: -5,
+                        color: Colors.lightBlueAccent,
+                      ),
+                      child: Text(
+                        userMap!['name'],
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontSize: 18,
+                        ),
+                      ),
+                    ),
                   ],
                 ),
               );
@@ -85,6 +113,18 @@ class ChatRoom extends StatelessWidget {
               return Container();
             }
           },
+        ),
+        leading: Neumorphic(
+          margin: EdgeInsets.all(8),
+          style: NeumorphicStyle(
+            boxShape: NeumorphicBoxShape.circle(),
+            depth: -10,
+            color: Colors.lightBlueAccent,
+          ),
+          child: BackButton(
+            color: Colors.white,
+            onPressed: () => Navigator.pop(context),
+          ),
         ),
       ),
       body: SingleChildScrollView(
@@ -146,13 +186,15 @@ class ChatRoom extends StatelessWidget {
                     Container(
                       height: size.height / 17,
                       width: size.width / 1.3,
-                      child: TextField(
-                        controller: _message,
-                        decoration: InputDecoration(
-                            hintText: "Send Message",
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(8),
-                            )),
+                      child: Neumorphic(
+                        child: TextField(
+                          controller: _message,
+                          decoration: InputDecoration(
+                              hintText: "Send Message",
+                              border: OutlineInputBorder(
+                                borderRadius: BorderRadius.circular(8),
+                              )),
+                        ),
                       ),
                     ),
                     Container(
