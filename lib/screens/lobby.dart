@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:funzone/apis/firebaseapi.dart';
 import 'package:funzone/screens/customize.dart';
 import 'package:funzone/screens/loadingscreen.dart';
@@ -41,9 +41,21 @@ class _WaitingLobbyState extends State<WaitingLobby> {
         automaticallyImplyLeading: false,
         centerTitle: true,
         backgroundColor: Colors.white,
-        title: Text(
-          'Fun Zone 💬',
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+        title: Neumorphic(
+          padding: EdgeInsets.all(10),
+          style: NeumorphicStyle(
+            boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(20)),
+            depth: -5,
+            color: Colors.white,
+          ),
+          child: Text(
+            'Fun Zone 💬',
+            style: TextStyle(
+              color: Colors.black,
+              fontWeight: FontWeight.bold,
+              fontSize: 20,
+            ),
+          ),
         ),
         // foregroundColor: Colors.transparent,
       ),
@@ -69,18 +81,22 @@ class _WaitingLobbyState extends State<WaitingLobby> {
                             print(snapshot.data!.docs[index].get("publicKey"));
                             return snapshot.data!.docs[index].get("uid") !=
                                     FirebaseAuth.instance.currentUser!.uid
-                                ? ChatHeads(
-                                    snapshot.data!.docs[index].get("username"),
-                                    snapshot.data!.docs[index].get("email"),
-                                    snapshot.data!.docs[index]
-                                        .get("uploadedImgUrl"),
-                                    snapshot.data!.docs[index].get("about"),
-                                    snapshot.data!.docs[index].get("uid"),
-                                    snapshot.data!.docs[index].get("age"),
-                                    snapshot.data!.docs[index].get("gender"),
-                                    snapshot.data!.docs[index].id,
-                                    snapshot.data!.docs[index].get("publicKey"),
-                                    // blogSnapshot.docs[index].id,
+                                ? Neumorphic(
+                                    child: ChatHeads(
+                                      snapshot.data!.docs[index]
+                                          .get("username"),
+                                      snapshot.data!.docs[index].get("email"),
+                                      snapshot.data!.docs[index]
+                                          .get("uploadedImgUrl"),
+                                      snapshot.data!.docs[index].get("about"),
+                                      snapshot.data!.docs[index].get("uid"),
+                                      snapshot.data!.docs[index].get("age"),
+                                      snapshot.data!.docs[index].get("gender"),
+                                      snapshot.data!.docs[index].id,
+                                      snapshot.data!.docs[index]
+                                          .get("publicKey"),
+                                      // blogSnapshot.docs[index].id,
+                                    ),
                                   )
                                 : Container();
                           },

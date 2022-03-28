@@ -1,5 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:funzone/screens/Detailspage.dart';
 import 'package:funzone/screens/chatpage.dart';
 import 'package:sizer/sizer.dart';
@@ -41,25 +41,17 @@ class ChatHeads extends StatelessWidget {
               ),
             );
           },
-          child: Container(
-            decoration: BoxDecoration(
+          child: Neumorphic(
+            margin: EdgeInsets.symmetric(vertical: 1.h, horizontal: 1.h),
+            padding: EdgeInsets.all(10),
+            style: NeumorphicStyle(
+              boxShape: NeumorphicBoxShape.roundRect(
+                BorderRadius.circular(10),
+              ),
+              depth: -5,
               color: Colors.white,
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(10),
-                  topRight: Radius.circular(10),
-                  bottomLeft: Radius.circular(10),
-                  bottomRight: Radius.circular(10)),
-              boxShadow: [
-                BoxShadow(
-                  color: Colors.grey.withOpacity(0.5),
-                  spreadRadius: 5,
-                  blurRadius: 7,
-                  offset: Offset(0, 3), // changes position of shadow
-                ),
-              ],
+              shape: NeumorphicShape.concave,
             ),
-            margin: EdgeInsets.fromLTRB(10, 3, 10, 3),
-            height: 12.h,
             child: Row(
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
@@ -103,22 +95,40 @@ class ChatHeads extends StatelessWidget {
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(
-                        FirebaseAuth.instance.currentUser!.uid == uid
-                            ? "You"
-                            : name,
-                        style: TextStyle(
-                          color: Colors.lightBlueAccent,
-                          fontWeight: FontWeight.bold,
-                          fontSize: 20,
+                      Neumorphic(
+                        padding: EdgeInsets.all(5),
+                        child: Text(
+                          FirebaseAuth.instance.currentUser!.uid == uid
+                              ? "You"
+                              : name,
+                          style: TextStyle(
+                            color: Colors.lightBlueAccent,
+                            fontWeight: FontWeight.bold,
+                            fontSize: 20,
+                          ),
                         ),
                       ),
-                      Text(
-                        "Tap to send a message",
-                        style: TextStyle(
-                            color: Colors.grey,
-                            fontSize: 20,
-                            fontWeight: FontWeight.normal),
+                      SizedBox(
+                        height: 1.h,
+                      ),
+                      Neumorphic(
+                        // padding: EdgeInsets.all(2),
+                        style: NeumorphicStyle(
+                          boxShape: NeumorphicBoxShape.roundRect(
+                            BorderRadius.circular(10),
+                          ),
+                          depth: -5,
+                          color: Colors.white,
+                          shape: NeumorphicShape.concave,
+                        ),
+
+                        child: Text(
+                          "Tap to send a message",
+                          style: TextStyle(
+                              color: Colors.grey,
+                              fontSize: 20,
+                              fontWeight: FontWeight.normal),
+                        ),
                       )
                     ],
                   ),
@@ -126,10 +136,12 @@ class ChatHeads extends StatelessWidget {
                 SizedBox(
                   width: 4.w,
                 ),
-                Icon(
+                NeumorphicIcon(
                   Icons.message,
                   size: 30,
-                  color: Colors.lightBlueAccent,
+                  style: NeumorphicStyle(
+                    color: Colors.lightBlueAccent,
+                  ),
                 ),
               ],
             ),
