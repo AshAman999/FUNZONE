@@ -1,5 +1,4 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:sizer/sizer.dart';
 
@@ -12,9 +11,35 @@ class DetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: Colors.lightBlueAccent,
-        title: Neumorphic(child: Text(" Profile")),
-        actions: [],
+        title: Neumorphic(
+          padding: EdgeInsets.all(10),
+          style: NeumorphicStyle(
+            boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(10)),
+            depth: -5,
+            color: Colors.lightBlueAccent,
+          ),
+          child: Text(
+            " Profile",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 18,
+            ),
+          ),
+        ),
+        leading: Neumorphic(
+          margin: EdgeInsets.all(8),
+          style: NeumorphicStyle(
+            boxShape: NeumorphicBoxShape.circle(),
+            depth: -10,
+            color: Colors.lightBlueAccent,
+          ),
+          child: BackButton(
+            color: Colors.white,
+            onPressed: () => Navigator.pop(context),
+          ),
+        ),
       ),
       body: SafeArea(
         child: SingleChildScrollView(

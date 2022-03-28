@@ -21,6 +21,8 @@ class _WaitingLobbyState extends State<WaitingLobby> {
   bool loaded = false;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
   var stream;
+  GlobalKey<ScaffoldState> _key = GlobalKey();
+
   @override
   void initState() {
     stream = _firestore.collection("users").snapshots();
@@ -36,7 +38,7 @@ class _WaitingLobbyState extends State<WaitingLobby> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      drawer: NavDrawer(imageurl, name, widget.publickey),
+      drawer: NavDrawer(imageurl, name, widget.publickey, _key),
       appBar: AppBar(
         automaticallyImplyLeading: false,
         centerTitle: true,
@@ -57,6 +59,25 @@ class _WaitingLobbyState extends State<WaitingLobby> {
             ),
           ),
         ),
+        leading: Neumorphic(
+          margin: EdgeInsets.all(5),
+          style: NeumorphicStyle(
+            boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(20)),
+            depth: 10,
+            color: Colors.white,
+          ),
+          child: IconButton(
+            icon: Icon(
+              Icons.menu,
+              color: Colors.black,
+            ),
+            onPressed: () {
+              //
+              Scaffold.of(context).openDrawer();
+            },
+          ),
+        ),
+
         // foregroundColor: Colors.transparent,
       ),
       body: Container(
