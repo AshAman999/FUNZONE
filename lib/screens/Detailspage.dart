@@ -1,5 +1,5 @@
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter_neumorphic/flutter_neumorphic.dart';
 import 'package:sizer/sizer.dart';
 
 class DetailsPage extends StatelessWidget {
@@ -11,9 +11,35 @@ class DetailsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        centerTitle: true,
         backgroundColor: Colors.lightBlueAccent,
-        title: Text(" Profile"),
-        actions: [],
+        title: Neumorphic(
+          padding: EdgeInsets.all(10),
+          style: NeumorphicStyle(
+            boxShape: NeumorphicBoxShape.roundRect(BorderRadius.circular(10)),
+            depth: -5,
+            color: Colors.lightBlueAccent,
+          ),
+          child: Text(
+            " Profile",
+            style: TextStyle(
+              color: Colors.white,
+              fontSize: 18,
+            ),
+          ),
+        ),
+        leading: Neumorphic(
+          margin: EdgeInsets.all(8),
+          style: NeumorphicStyle(
+            boxShape: NeumorphicBoxShape.circle(),
+            depth: -10,
+            color: Colors.lightBlueAccent,
+          ),
+          child: BackButton(
+            color: Colors.white,
+            onPressed: () => Navigator.pop(context),
+          ),
+        ),
       ),
       body: SafeArea(
         child: SingleChildScrollView(
@@ -49,11 +75,13 @@ class DetailsPage extends StatelessWidget {
                     ),
                   ],
                 ),
-                CupertinoTextField(
-                  enabled: false,
-                  autocorrect: false,
-                  textCapitalization: TextCapitalization.words,
-                  placeholder: name,
+                Neumorphic(
+                  child: CupertinoTextField(
+                    enabled: false,
+                    autocorrect: false,
+                    textCapitalization: TextCapitalization.words,
+                    placeholder: name,
+                  ),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -68,10 +96,12 @@ class DetailsPage extends StatelessWidget {
                     ),
                   ],
                 ),
-                CupertinoTextField(
-                  enabled: false,
-                  placeholder: email,
-                  keyboardType: TextInputType.emailAddress,
+                Neumorphic(
+                  child: CupertinoTextField(
+                    enabled: false,
+                    placeholder: email,
+                    keyboardType: TextInputType.emailAddress,
+                  ),
                 ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -88,11 +118,13 @@ class DetailsPage extends StatelessWidget {
                         ),
                         Container(
                           width: 15.w,
-                          child: CupertinoTextField(
-                            enabled: false,
-                            placeholder: age,
-                            maxLength: 3,
-                            keyboardType: TextInputType.number,
+                          child: Neumorphic(
+                            child: CupertinoTextField(
+                              enabled: false,
+                              placeholder: age,
+                              maxLength: 3,
+                              keyboardType: TextInputType.number,
+                            ),
                           ),
                         ),
                       ],
@@ -109,12 +141,14 @@ class DetailsPage extends StatelessWidget {
                         ),
                         Container(
                           width: 15.w,
-                          child: CupertinoTextField(
-                            enabled: false,
-                            placeholder: gender,
-                            autofillHints: [],
-                            maxLength: 1,
-                            keyboardType: TextInputType.text,
+                          child: Neumorphic(
+                            child: CupertinoTextField(
+                              enabled: false,
+                              placeholder: gender,
+                              autofillHints: [],
+                              maxLength: 1,
+                              keyboardType: TextInputType.text,
+                            ),
                           ),
                         ),
                       ],
@@ -133,11 +167,13 @@ class DetailsPage extends StatelessWidget {
                     ),
                   ],
                 ),
-                CupertinoTextField(
-                  enabled: false,
-                  textCapitalization: TextCapitalization.words,
-                  placeholder: about,
-                  maxLines: 5,
+                Neumorphic(
+                  child: CupertinoTextField(
+                    enabled: false,
+                    textCapitalization: TextCapitalization.words,
+                    placeholder: about,
+                    maxLines: 5,
+                  ),
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 1.h),
