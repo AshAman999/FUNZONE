@@ -126,7 +126,7 @@ class _CustomizeState extends State<Customize> {
         ),
         // leading round back button
         leading: Neumorphic(
-          padding: EdgeInsets.all(10),
+          margin: EdgeInsets.all(8),
           style: NeumorphicStyle(
             boxShape: NeumorphicBoxShape.circle(),
             depth: -10,
