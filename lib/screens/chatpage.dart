@@ -97,7 +97,7 @@ class ChatRoom extends StatelessWidget {
                   fit: BoxFit.cover,
                 ),
               ),
-              height: size.height / 1.25,
+              height: size.height / 1.3,
               width: size.width,
               child: StreamBuilder<QuerySnapshot>(
                 stream: _firestore
