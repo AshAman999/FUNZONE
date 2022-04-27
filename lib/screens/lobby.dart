@@ -104,17 +104,22 @@ class _WaitingLobbyState extends State<WaitingLobby> {
                                     FirebaseAuth.instance.currentUser!.uid
                                 ? Neumorphic(
                                     child: ChatHeads(
-                                      snapshot.data!.docs[index]
+                                      name: snapshot.data!.docs[index]
                                           .get("username"),
-                                      snapshot.data!.docs[index].get("email"),
-                                      snapshot.data!.docs[index]
+                                      email: snapshot.data!.docs[index]
+                                          .get("email"),
+                                      imgurl: snapshot.data!.docs[index]
                                           .get("uploadedImgUrl"),
-                                      snapshot.data!.docs[index].get("about"),
-                                      snapshot.data!.docs[index].get("uid"),
-                                      snapshot.data!.docs[index].get("age"),
-                                      snapshot.data!.docs[index].get("gender"),
-                                      snapshot.data!.docs[index].id,
-                                      snapshot.data!.docs[index]
+                                      about: snapshot.data!.docs[index]
+                                          .get("about"),
+                                      uid:
+                                          snapshot.data!.docs[index].get("uid"),
+                                      age:
+                                          snapshot.data!.docs[index].get("age"),
+                                      gender: snapshot.data!.docs[index]
+                                          .get("gender"),
+                                      id: snapshot.data!.docs[index].id,
+                                      publicKey: snapshot.data!.docs[index]
                                           .get("publicKey"),
                                       // blogSnapshot.docs[index].id,
                                     ),
