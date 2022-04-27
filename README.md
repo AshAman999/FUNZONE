@@ -45,6 +45,18 @@ Demo https://youtu.be/L_gJ0wlNrEw
 - More features coming soon
 
 
+## Screenshots
+
+
+| <img src="https://user-images.githubusercontent.com/57723319/165449103-5a31853e-3026-4c0e-bed5-8a38e7cc9817.png" width="300" height="600" /> |<img src="https://user-images.githubusercontent.com/57723319/165449110-93165fac-52f3-4435-b959-cc7fb728e2eb.png" width="300" height="600" />|
+              
+              
+              
+| <img src="https://user-images.githubusercontent.com/57723319/165449346-0d8d61e1-6252-4691-9313-a74b1d37940d.png" width="300" height="600" />
+        | <img src="https://user-images.githubusercontent.com/57723319/165449328-f93c3686-3a00-46c0-ba4d-4d7caeb55ef1.png" width="300" height="600" />
+                     |
+
+
 
 
 ## Extras
