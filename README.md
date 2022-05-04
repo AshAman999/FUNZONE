@@ -33,6 +33,7 @@ Demo https://youtu.be/L_gJ0wlNrEw
 | app icons        | Canva                        |
 | Encryption         | Passwords hashed with SHA-256         |
 | Speciality         | End to end encrypted messages       |
+| Backend | Node Js [WIP] |
 
 
 
